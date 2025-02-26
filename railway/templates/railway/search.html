@@ -1,0 +1,52 @@
+<!-- railway/search.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Trains</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    
+    <h1>Search for Trains</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="source">Source:</label>
+        <input type="text" id="source" name="source" value="{{ source }}">
+
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" name="destination" value="{{ destination }}">
+
+        <button type="submit">Search</button>
+    </form>
+
+    {% if trains %}
+        <h2>Found {{ trains.count }} Trains</h2>
+        <ul>
+            {% for train in trains %}
+                <!-- Debugging line to see all the fields of each train -->
+                <li>
+                  <!-- This will print all the fields of the train object -->
+                    <strong>Train ID:</strong> {{ train.train_number }}<br>
+                    <strong>Train Name:</strong> {{ train.train_name }}<br>
+                    <strong>Departure Time:</strong> {{ train.departure_time }}<br>
+                    <strong>Arrival Time:</strong> {{ train.arrival_time }}<br>
+                    <strong>Source:</strong> {{ train.source }}<br>
+                    <strong>Destination:</strong> {{ train.destination }}<br>
+                    <strong>Ticket Price:</strong> ₹{{ train.ticket_price }}<br>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No trains found for the given source and destination.</p>
+    {% endif %}
+
+    <div align="center">
+        <form action="{% url 'home' %}" method="get">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+        </form>
+    </div>
+</body>
+</html>

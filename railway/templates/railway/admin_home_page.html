@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 50px 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            width: 250px;
+            height: 250px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            color: #4CAF50;
+        }
+
+        .card-title {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card-description {
+            font-size: 14px;
+            color: #777;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 30px;
+            color: #333;
+        }
+
+        /* Add responsive design for smaller screens */
+        @media (max-width: 768px) {
+            .card {
+                width: 200px;
+                height: 200px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Admin Dashboard</h1>    
+    <div class="dashboard-container">
+        <a href="{% url 'add_train' %}" class="card">
+            <div class="card-icon">
+                <i class="fas fa-train"></i>
+            </div>
+            <div class="card-title">Add Trains</div>
+            <div class="card-description">Add new trains to the system</div>
+        </a>
+
+        <a href="{% url 'list_trains' %}" class="card">
+            <div class="card-icon">
+                <i class="fas fa-edit"></i>
+            </div>
+            <div class="card-title">Update Trains</div>
+            <div class="card-description">Update existing train details</div>
+        </a>
+
+        <a href="all_bookings" class="card">
+            <div class="card-icon">
+                <i class="fas fa-history"></i>
+            </div>
+            <div class="card-title">View Booking History</div>
+            <div class="card-description">View the booking history of users</div>
+        </a>
+    </div>
+    <center>
+    <form action="{% url 'home' %}" method="get">
+        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+    </form>
+</center>
+</body>
+</html>

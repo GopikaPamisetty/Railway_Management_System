@@ -1,0 +1,31 @@
+<h2>Your Booking History</h2>
+{% if bookings %}
+    <table>
+        <tr>
+            <th>Train Name</th>
+            <th>Departure Date</th>
+            <th>Arrival Date</th>
+            <th>Seat Number</th>
+            <th>Booking Date</th>
+            <th>Booking Status</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Class</th>
+        </tr>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.train_name }}</td>
+                <td>{{ booking.departure_date }}</td>
+                <td>{{ booking.arrival_date }}</td>
+                <td>{{ booking.seat_number }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.booking_status }}</td>
+                <td>{{ booking.from_city }}</td>
+                <td>{{ booking.to_city }}</td>
+                <td>{{ booking.class }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No bookings found.</p>
+{% endif %}

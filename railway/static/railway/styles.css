@@ -1,0 +1,73 @@
+/* Navbar customization */
+.navbar {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    justify-content: center; /* Centers items horizontally */
+    align-items: center; /* Centers items vertically */
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #ffffff !important;
+    
+    font-weight: bold;
+    font-weight: 900; /* Thicker font weight for more boldness */
+    font-size: 1.5rem; /* Increase font size as needed */
+    padding: 0.75rem 1rem; /* Add padding for spacing */
+    text-align: center;
+}
+
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #ffd700 !important; /* Gold color on hover */
+}
+
+/* Hero section styling */
+.hero {
+    background: url("{% static 'images/hero.jpg' %}") no-repeat center center/cover;
+}
+
+.hero h2 {
+    font-size: 2.5em;
+}
+
+.hero p {
+    font-size: 1.2em;
+}
+
+.btn-success {
+    font-size: 1.2em;
+    padding: 10px 20px;
+}
+
+/* Footer styling */
+footer {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+}

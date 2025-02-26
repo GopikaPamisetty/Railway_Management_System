@@ -1,0 +1,10 @@
+{% extends 'railway/base.html' %}
+
+{% block content %}
+<h1>Available Trains</h1>
+<ul>
+    {% for train in trains %}
+    <li>{{ train.name }} - {{ train.destination }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Management System</title>
+    {% load static %}
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .navbar ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: uppercase;
+            padding: 8px 15px;
+            display: inline-block;
+            border-radius: 4px;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #5c6bc0;
+        }
+
+        .navbar ul li a.active {
+            background-color: #4CAF50;
+            font-weight: bold;
+        }
+
+        /* Form Styles */
+        form {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        form input,
+        form textarea,
+        form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        /* Success/Error Message */
+        .alert {
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .alert-info {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Login</a></li>
+            <li><a href="{% url 'register' %}" class="{% if request.path == '/register/' %}active{% endif %}">Register</a></li>
+             </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Content Block (Will be filled by child templates) -->
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Railway Management System | All Rights Reserved</p>
+    </footer>
+</body>
+</html>

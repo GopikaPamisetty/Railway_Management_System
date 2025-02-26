@@ -1,0 +1,66 @@
+<!-- templates/railway/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <style>
+        .top-right-corner {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 18px;
+            color: #555;
+            font-family: Arial, sans-serif;
+        }
+
+        .quote {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-style: italic;
+            color: red;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+            animation: move-left 10s linear infinite;
+        }
+
+        @keyframes move-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+
+        .main-content {
+            padding-top: 50px; /* Adjust padding if needed */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Moving quote -->
+    <div class="quote">
+        "Railway support ensures your safety,
+        Guiding you through every journey with care."
+    </div>
+
+    <!-- Login/Authenticated user section -->
+    <div class="top-right-corner">
+        {% if user.is_authenticated %}
+            Hey, {{ user.username }}!
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+
+    <!-- Main content area where individual page content will appear -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

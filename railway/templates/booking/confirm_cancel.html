@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancel Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px 30px;
+            width: 400px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5em;
+            color: #333333;
+        }
+        p {
+            font-size: 1em;
+            color: #555555;
+            margin: 10px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #6c757d;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+        }
+        a:hover {
+            background-color: #5a6268;
+        }
+        button {
+            background-color: #dc3545;
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Are you sure you want to cancel this booking?</h1>
+        <p><strong>Train Number:</strong> {{ booking.train_number }}</p>
+        <p><strong>Travel Date:</strong> {{ booking.booking_date|date:"Y-m-d" }}</p>
+        <p><strong>From:</strong> {{ booking.source }}</p>
+        <p><strong>To:</strong> {{ booking.destination }}</p>
+        <p><strong>Class:</strong> {{ booking.travel_class }}</p>
+        <p><strong>Number of Tickets:</strong> {{ booking.number_of_tickets }}</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">Confirm Cancellation</button>
+            <a href="{% url 'booking_history' %}">Back to Booking History</a>
+        </form>
+    </div>
+</body>
+</html>

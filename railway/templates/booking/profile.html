@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Selection</title>
+    <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Container Styles */
+        .profile-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 20px;
+        }
+
+        /* Title Styles */
+        h1 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Profile Option Styles */
+        .profile-option {
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .profile-option:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Profile Icon Styles */
+        .profile-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        /* Profile Label Styles */
+        .profile-label {
+            margin-top: 12px;
+            font-weight: 500;
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .profile-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Select Your Profile</h1>
+        <div class="profile-container">
+            <!-- Admin Login -->
+            <div class="profile-option">
+                <a href="{% url 'administration_login' %}">
+                    <img src="{% static 'images/admin_icon.png' %}" alt="Admin Icon" class="profile-icon">
+                    <div class="profile-label">Admin</div>
+                </a>
+            </div>
+            <!-- Passenger Login -->
+            <div class="profile-option">
+                <a href="{% url 'passenger_login' %}">
+                    <img src="{% static 'images/passenger_icon.png' %}" alt="Passenger Icon" class="profile-icon">
+                    <div class="profile-label">Passenger</div>
+                </a>
+            </div>
+            <!-- Customer Support Login -->
+            <div class="profile-option">
+                <a href="{% url 'customer_support_login' %}">
+                    <img src="{% static 'images/support_icon.png' %}" alt="Support Icon" class="profile-icon">
+                    <div class="profile-label">Customer Support</div>
+                </a>
+            </div>
+        </div>
+        <div align="center">
+            <form action="{% url 'home' %}" method="get">
+                <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+            </form>
+        </div>
+    </div>
+    <br><br>
+    
+</body>
+</html>

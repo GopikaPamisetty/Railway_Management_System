@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Train</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url('{% static "images/book.webp" %}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        
+        .container {
+            margin-top: 50px;
+        }
+        .form-section {
+            margin-top: 20px;
+        }
+        /* Box Styling */
+        .form-box {
+            background-color: rgba(255, 255, 255,0.2); /* White background with 80% opacity */
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .form-box h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-control, .form-select {
+            max-width: 300px;
+            margin: 10px auto;
+        }
+        .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+        .form-check {
+            margin-left: 20px;
+        }
+        .alert {
+            margin-bottom: 20px;
+        }
+        /* Train List Styling */
+        .train-list {
+            margin-top: 20px;
+        }
+        .train-item {
+            background-color: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+        .train-item.ac {
+            background-color: #cce5ff; /* Light blue for AC */
+        }
+        .train-item.non-ac {
+            background-color: #e2e3e5; /* Light gray for Non-AC */
+        }
+        .train-item:hover {
+            background-color: #e9ecef; /* Slightly darker on hover */
+        }
+        .train-item strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Display messages -->
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Train Search Form inside a box -->
+    <div class="form-box">
+        <h1>Book Your Train</h1>
+        
+        <form method="POST" class="form-section">
+            {% csrf_token %}
+            <!-- Source and Destination Fields -->
+            <div class="mb-3">
+                <label for="source" class="form-label">Source:</label>
+                <input type="text" id="source" name="source" class="form-control" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="destination" class="form-label">Destination:</label>
+                <input type="text" id="destination" name="destination" class="form-control" required>
+            </div>
+
+            <button type="submit" name="search_trains" class="btn btn-primary">Search for available Trains</button>
+        </form>
+
+        {% if trains %}
+        <!-- Available Trains List -->
+        <div class="train-list">
+            <h3>Available Trains:</h3>
+            <form method="POST">
+                {% csrf_token %}
+                <ul class="list-group">
+                    {% for train in trains %}
+                        <li class="list-group-item train-item {% if train.ac_non_ac == 'AC' %}ac{% else %}non-ac{% endif %}">
+                            <input type="radio" name="train" value="{{ train.id }}" required>
+                            <strong>Train ID:</strong> {{ train.train_number }} - {{ train.train_name }}<br>
+                            <strong>Departure Time:</strong> {{ train.departure_time }}<br>
+                            <strong>Arrival Time:</strong> {{ train.arrival_time }}<br>
+                            <strong>Source:</strong> {{ train.source }}<br>
+                            <strong>Destination:</strong> {{ train.destination }}<br>
+                            <strong>Ticket Price:</strong> ₹{{ train.ticket_price }}<br>
+
+                            <!-- AC or Non-AC Selection -->
+                            <div class="form-check">
+                                <input type="radio" name="ac_non_ac" value="AC" class="form-check-input" required>
+                                <label class="form-check-label" for="ac_non_ac">AC</label>
+                            </div>
+                            <div class="form-check">
+                                <input type="radio" name="ac_non_ac" value="Non-AC" class="form-check-input" required>
+                                <label class="form-check-label" for="ac_non_ac">Non-AC</label>
+                            </div>
+                            <div class="mb-3">
+                                <label for="num_seats" class="form-label">Number of Tickets:</label>
+                                <input type="number" id="num_seats" name="num_seats" class="form-control" min="1" value="1" required>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <!-- Passenger Details Section -->
+                <div class="form-section">
+                    <h4>Enter Passenger Details</h4>
+                    
+                    <div class="mb-3">
+                        <label for="passenger_age" class="form-label">Passenger Age:</label>
+                        <input type="text" id="passenger_age" name="passenger_age" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="passenger_gender" class="form-label">Gender:</label>
+                        <select id="passenger_gender" name="passenger_gender" class="form-select" required>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" name="book_train" class="btn btn-success">Book Selected Train</button>
+                </div>
+            </form>
+        </div>
+        {% elif request.POST.source and request.POST.destination %}
+            <p>No trains available for the selected route.</p>
+        {% endif %}
+    </div>
+</div>
+<br><br><div align="center">
+    <form action="{% url 'home' %}" method="get">
+        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+    </form>
+</div><br><br><br>
+
+<!-- Bootstrap JS (optional, for responsive behavior) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

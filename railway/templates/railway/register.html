@@ -1,0 +1,22 @@
+<!-- railway/templates/railway/register.html -->
+
+{% extends "railway/base.html" %}
+
+{% block content %}
+  <h2>Register</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+    <br><br><br>
+    <div align="center">
+      <form action="{% url 'home' %}" method="get">
+          <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+      </form>
+  </div><br><br>
+  </form>
+ 
+  {% for message in messages %}
+    <p>{{ message }}</p>
+  {% endfor %}
+{% endblock %}

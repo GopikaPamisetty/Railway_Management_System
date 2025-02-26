@@ -1,0 +1,158 @@
+{% extends 'railway/base1.html' %}
+{% load static %}
+<!DOCTYPE html>
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Railway Management System - Home</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'railway/styles.css' %}">
+    <style>
+        
+        .hero {
+            background-image: url("{% static 'images/hero5.jpeg' %}");
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            background-color: #0f4b94; /* Light blue color */
+            padding: 10px; /* Adds padding around the text */
+            border-radius: 5px; /* Optional: Adds rounded corners to the box */
+            display: inline-block; /* Ensures the box only surrounds the text */
+        }
+        
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color:red;
+        }
+        main {
+            margin-top: -5rem; /* Adjusts overlap between hero section and main */
+        }
+        .navbar {
+            padding-top: 1.2rem; /* Adjust as needed */
+            padding-bottom: 1rem; /* Adjust as needed */
+        }
+        
+        .navbar-nav .nav-item .nav-link {
+            color: #ffffff !important;
+            
+            font-weight: bold;
+            font-weight: 900; /* Thicker font weight for more boldness */
+            font-size: 1rem; /* Increase font size as needed */
+            padding: 0.75rem 1rem; /* Add padding for spacing */
+            text-align: center;
+        }
+        #heroCarousel .carousel-item {
+            height: 100vh; /* Full viewport height */
+            background-size: cover;
+            background-position: center;
+        }
+        
+        #heroCarousel .carousel-caption {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            color: white;
+        }
+        
+        #heroCarousel .carousel-caption h2 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        
+        #heroCarousel .carousel-caption p {
+            font-size: 1.2rem;
+        }
+        
+    </style>
+    
+    
+</head>
+<body>
+    <header>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="{% url 'home' %}">Railway Management</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'search_trains' %}">Trains</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'booking' %}">Book_Train</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'booking_history' %}">Booking History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'raise_query' %}">Raise Query</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'query_list' %}">Queries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus"></i> Register</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+                    <li class="nav-item"><a class="nav-link" 
+                        {% if user.is_authenticated %}
+                        href="{% url 'logout' %}" {% endif %}>Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section class="hero text-center text-white bg-secondary py-5">
+            <h2>Welcome to the Railway Management System</h2>
+            <p>Your one-stop solution for managing train journeys efficiently and conveniently.</p>
+            <a href="{% url 'search_trains' %}" class="btn btn-success btn-lg mt-3">Explore Trains</a>
+        </section>
+
+        <section class="container my-5">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <h3>Book Tickets Easily</h3>
+                    <p>Book train tickets for your preferred destinations with ease and convenience.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Manage Your Bookings</h3>
+                    <p>Access and manage all your past and upcoming bookings in one place.</p>
+                </div>
+                <div class="col-md-4">
+                    <h3>Customer Support</h3>
+                    <p>Need help? Raise queries and get prompt assistance from our support team.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="container text-center my-5">
+            <h2>About Our System</h2>
+            <p>The Railway Management System is designed to streamline ticket bookings, manage train schedules, handle user queries, and provide efficient customer support. Navigate through the options above to explore all features.</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-primary text-white text-center py-3">
+        <p>&copy; 2024 Railway Management System | All Rights Reserved</p>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

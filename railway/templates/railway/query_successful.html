@@ -1,0 +1,17 @@
+<!-- query_success.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Successful</title>
+</head>
+<body>
+    <h1>Your query was successfully submitted!</h1>
+    <br><br>
+    <div align="center">
+        <form action="{% url 'home' %}" method="get">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+        </form>
+    </div> <!-- Redirect to Home page after successful submission -->
+</body>
+</html>

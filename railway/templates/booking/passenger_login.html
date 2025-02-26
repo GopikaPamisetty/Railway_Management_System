@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-table {
+            background-color: white;
+            width: 400px; /* Increase the width */
+            padding: 40px; /* Increase the padding */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 12px; /* Increase input padding */
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px; /* Increase font size */
+        }
+        button {
+            width: 100%;
+            padding: 12px; /* Increase button padding */
+            background-color: #5c6bc0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px; /* Increase font size */
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3f51b5;
+        }
+        .message {
+            color: red;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table class="login-table">
+        <tr>
+            <td>
+                <h2>Passenger Login</h2>
+                {% if messages %}
+                    <div class="message">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="email" name="email" placeholder="Email" required><br>
+                    <input type="password" name="password" placeholder="Password" required><br>
+                    <button type="submit">Login</button>
+                </form>
+                <br><br>
+                <div align="center">
+                    <form action="{% url 'home' %}" method="get">
+                        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

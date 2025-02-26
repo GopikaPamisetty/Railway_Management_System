@@ -1,0 +1,132 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Booking History</title>
+    <link rel="stylesheet" href="{% static 'booking/style.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px 15px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td {
+            color: #555;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e9e9e9;
+        }
+
+        a {
+            text-decoration: none;
+            color: #d9534f;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #c9302c;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #888;
+        }
+
+        .btn-home {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            margin-top: 30px;
+        }
+
+        .btn-home:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Booking History</h2>
+
+    {% if bookings %}
+        <table>
+            <tr>
+                <th>Train Number</th>
+                <th>Travel Date</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Class</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            {% for booking in bookings %}
+                <tr>
+                    <td>{{ booking.train_number }}</td>
+                    <td>{{ booking.booking_date|date:"Y-m-d" }}</td>
+                    <td>{{ booking.source }}</td>
+                    <td>{{ booking.destination }}</td>
+                    <td>{{ booking.travel_class }}</td>
+                    <td>{{ booking.email }}</td>
+                    <td>{{ booking.status }}</td>
+                    <td>
+                        {% if booking.status != 'Cancelled' %}
+                            <a href="{% url 'cancel_booking' booking.id %}">Cancel</a>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No bookings found.</p>
+    {% endif %}
+
+    <br>
+    <br>
+    <div align="center">
+        <form action="{% url 'home' %}" method="get">
+            <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">Go to Home Page</button>
+        </form>
+    </div>
+</body>
+</html>
